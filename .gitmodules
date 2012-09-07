@@ -1,0 +1,6 @@
+[submodule "vendor/marked"]
+	path = vendor/marked
+	url = git://github.com/chjj/marked.git
+[submodule "vendor/spec"]
+	path = vendor/spec
+	url = git://github.com/kitcambridge/spec.git

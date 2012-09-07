@@ -1,0 +1,30 @@
+{
+  "name": "sjson",
+  "version": "1.0.0",
+  "description": "Stable JSON serializer. The order of object elements are stable.",
+  "homepage": "https://github.com/shibukawa/Stable-JSON",
+  "main": "./lib/json3",
+  "keywords": ["json", "spec", "ecma", "es5", "lexer", "parser", "stringify"],
+  "licenses": [{
+    "type": "MIT",
+    "url": "http://shibu.mit-license.org/"
+  }],
+  "author": {
+    "name": "Yoshiki Shibukawa",
+    "web": "http://www.shibu.jp"
+  },
+  "maintainers": [{
+    "name": "Yoshiki Shibukawa",
+    "web": "http://www.shibu.jp"
+  }],
+  "bugs": {
+    "url": "https://github.com/shibukawa/Stable-JSON/issues"
+  },
+  "scripts": {
+    "test": "node test/test_*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shibukawa/Stable-JSON.git"
+  }
+}

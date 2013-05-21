@@ -15,11 +15,11 @@ class SJSON
         "\t": "\\t"
     };
 
-    static function stringify (source : variant) : string {
+    static function stringify (source : variant) : Nullable.<string> {
         return SJSON.stringify(source, '');
     }
 
-    static function stringify (source : variant, width : int) : string {
+    static function stringify (source : variant, width : int) : Nullable.<string> {
         var whitespace = "";
         if ((width -= width % 1) > 0) {
             for (width > 10 && (width = 10); whitespace.length < width; whitespace += " ");
@@ -27,7 +27,7 @@ class SJSON
         return SJSON.stringify(source, whitespace);
     }
 
-    static function stringify (source : variant, whitespace : string) : string {
+    static function stringify (source : variant, whitespace : string) : Nullable.<string> {
         whitespace = whitespace.length <= 10 ? whitespace : whitespace.slice(0, 10);
         var value = {} : Map.<variant>;
         value[''] = source;
@@ -99,11 +99,18 @@ class SJSON
         if (className == 'boolean') {
             // Booleans are represented literally.
             return value as string;
-        } else if (className == 'number') {
+        }
+        else if (value instanceof Boolean)
+        {
+            return (value as Boolean).toString();
+        }
+        else if (className == 'number' || value instanceof Number) {
             // JSON numbers must be finite. `Infinity` and `NaN` are serialized as
             // `"null"`.
             return (value as number) > -1 / 0 && (value as number) < 1 / 0 ? value as string : "null";
-        } else if (className == 'string') {
+        }
+        else if (className == 'string' || value instanceof String)
+        {
             // Strings are double-quoted and escaped.
             return SJSON.quote(value as string);
         }
@@ -144,7 +151,7 @@ class SJSON
                     {
                         var element = SJSON.serialize(key, objvalue, whitespace, indentation, stack);
                         if (element != null) {
-                            property_strings.push([key, SJSON.quote(property) + ":" + (whitespace ? " " : "") + element]);
+                            property_strings.push([key, SJSON.quote(key) + ":" + (whitespace ? " " : "") + element]);
                         }
                         any || (any = true);
                     }
